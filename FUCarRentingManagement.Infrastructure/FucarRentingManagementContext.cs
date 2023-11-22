@@ -46,7 +46,7 @@ public partial class FucarRentingManagementContext : DbContext
             entity.HasKey(e => e.CarId);
 
             entity.ToTable("CarInformation");
-
+            
             entity.Property(e => e.CarId).HasColumnName("CarID");
             entity.Property(e => e.CarDescription).HasMaxLength(220);
             entity.Property(e => e.CarName).HasMaxLength(50);
