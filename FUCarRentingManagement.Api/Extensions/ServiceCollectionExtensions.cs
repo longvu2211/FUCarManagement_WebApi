@@ -5,6 +5,10 @@ using FUCarRentingManagement.Infrastructure.Interfaces.Services;
 
 namespace FUCarRentingManagement.Api.Extensions
 {
+    /// <summary>
+    /// Add your extensions here
+    /// Service and Repository interfaces and implementations are registered here
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         public static void Register(this IServiceCollection services)
@@ -13,6 +17,9 @@ namespace FUCarRentingManagement.Api.Extensions
 
             services.AddScoped(typeof(IManufactureRepository), typeof(ManufacturerRepository));
             services.AddScoped<IManufacturerService, ManufacturerService>();
+
+            services.AddScoped(typeof(ISupplierRepository), typeof(SupplierRepository));
+            services.AddScoped<ISupplierService, SupplierService>();
         }
     }
 }

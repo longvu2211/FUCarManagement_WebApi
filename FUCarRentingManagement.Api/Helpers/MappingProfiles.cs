@@ -10,6 +10,7 @@ namespace FUCarRentingManagement.Api.Helpers
         {
             CreateMap<Manufacturer, ManufacturerDto>().ReverseMap();
             CreateMap<CarInformation, CarInformationDto>().ReverseMap();
+            CreateMap<Supplier, SupplierDto>().ReverseMap();
         }
     }
 }

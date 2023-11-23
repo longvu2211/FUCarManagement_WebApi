@@ -11,7 +11,5 @@ namespace FUCarRentingManagement.Api.Dtos
         public string? Description { get; set; }
 
         public string? ManufacturerCountry { get; set; }
-
-        public virtual ICollection<CarInformationDto>? CarInformations { get; set; }
     }
 }

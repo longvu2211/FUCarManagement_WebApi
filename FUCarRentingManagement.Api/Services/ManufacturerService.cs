@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FUCarRentingManagement.Api.Services
 {
+    /// <summary>
+    /// Can be used Singleton Pattern, but not recommended
+    /// </summary>
     public class ManufacturerService : IManufacturerService
     {
         private readonly IManufactureRepository _manufactureRepository;
@@ -18,6 +21,7 @@ namespace FUCarRentingManagement.Api.Services
         {
             try
             {
+                // check duplication of manufacturer
                 await _manufactureRepository.Add(manufacturer);
                 await _manufactureRepository.Save();
             } catch (BusinessException ex)

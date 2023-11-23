@@ -19,20 +19,23 @@ namespace FUCarRentingManagement.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all manufacturers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("manufacturers")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<ManufacturerDto>>> GetManufacturers()
         {
             var manufacturers = await _manufacturerService.GetManufacturers();
-            if (!manufacturers.Any())
-                return NotFound("Manufacturer is not found!");
+            if (manufacturers is null) return NotFound("Manufacturer is not found!");
             var mappedManufacturers = _mapper.Map<IEnumerable<ManufacturerDto>>(manufacturers)
                 .Select(x => new ManufacturerDto
                 {
                     ManufacturerId = x.ManufacturerId,
                     ManufacturerName = x.ManufacturerName,
                     ManufacturerCountry = x.ManufacturerCountry,
-                    Description = x.Description
+                    Description = x.Description,
                 });
             return Ok(mappedManufacturers);
         }
@@ -50,7 +53,7 @@ namespace FUCarRentingManagement.Api.Controllers
 
         [HttpGet("cars/{carId}/manufacturer")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Manufacturer>> GetManufacturerOfACar(int carId)
+        public async Task<ActionResult<ManufacturerDto>> GetManufacturerOfACar(int carId)
         {
             var manufacturer = await _manufacturerService.GetManufacturerOfACar(carId);
             if (manufacturer == null)
@@ -124,7 +127,11 @@ namespace FUCarRentingManagement.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        /// <summary>
+        /// Delete a specific manufacturer
+        /// </summary>
+        /// <param name="manufacturerId"></param>
+        /// <returns></returns>
         [HttpDelete("manufacturer/{manufacturerId}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeleteManufacturer(int manufacturerId)
